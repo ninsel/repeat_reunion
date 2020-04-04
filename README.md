@@ -8,7 +8,16 @@ To run, start with **_part0_**, which sets-up the variables, and then use the pa
  Index of parts:
  
  part 0: loading and organizing tables/variables
- 
+     Calls:
+       ReunionDatabase_0p2
+          Calls 
+              FindFiles.m
+              ProcessBORIS.m
+          Files needed
+              repeatreunionall.xlsx (spreadsheet with all reunion info)
+              eventsXXX.csv (all of the events files, located in a subdirectory of wherever repeatreunionall.xlsx is)               
+       RR_AddVocs
+       reun_mksumbehav.m
  part 1: analysis of female physical behavior, stranger/cagemate across days, using BORIS-scored data
  
  part 2: analysis of male physical behavior, stranger/cagemate across days, using BORIS-scored data
