@@ -8,7 +8,9 @@ To run, start with **_part0_**, which sets-up the variables, and then use the pa
  Index of parts:
  
  part 0: loading and organizing tables/variables
+ 
  part 1: analysis of female physical behavior, stranger/cagemate across days, using BORIS-scored data
+ 
  part 2: analysis of male physical behavior, stranger/cagemate across days, using BORIS-scored data
  
   
