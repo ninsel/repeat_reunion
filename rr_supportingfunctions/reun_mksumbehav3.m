@@ -1,4 +1,4 @@
-function sumbehav = reun_mksumbehav(rdb, betypes, whop, T)
+function sumbehav = reun_mksumbehav3(rdb, betypes, whop, T)
 % sumbehav = reun_mksumbehav(rdb, betypes, whop, T)
 %
 % creates the sumbehav matrix that sums/summarizes the proportion of time
@@ -40,15 +40,23 @@ end
 allsesstimes = min([rdb.sessionstart_end(:,2)-rdb.sessionstart_end(:,1) repmat(T, length(rdb.paircode),1)], [], 2);
 
 if whop == 1
-    sumbehav = nan(length(rdb.paircode), length(betypes));  
+    sumbehav = zeros(length(rdb.paircode), length(betypes));  
     for i = 1:length(rdb.paircode)
         for j = 1:length(betypes)
             curind = find(be_identcode(:,i) == betypes(j));
-            starttimes_fix = rdb.be_start_end(curind,1, i) - rdb.sessionstart_end(i);
+            starttimes_fix = rdb.be_start_end(curind,1, i) - rdb.sessionstart_end(i,1);
             indonind = find(starttimes_fix < T);
             curind = curind(indonind);
-            sumbehav(i,j) = nansum(rdb.be_start_end(curind,2, i) - rdb.be_start_end(curind,1,i))/allsesstimes(i);
-            if sumbehav(i,j) > 1
+            if  isnan(rdb.be_start_end(curind,2,i)) & isnan(rdb.be_start_end(curind+1,1,i))  %
+                rdb.be_start_end(curind,2,i) = rdb.sessionstart_end(i,1) + 1200;
+            elseif  rdb.be_start_end(curind,2,i) > rdb.sessionstart_end(i,1) + 1200
+                rdb.be_start_end(curind,2,i) = rdb.sessionstart_end(i,1) + 1200;
+            end 
+            newints = unionOfIntervals([rdb.be_start_end(curind,1,i) rdb.be_start_end(curind,2,i)]);
+            if ~isempty(newints)                  
+                sumbehav(i,j) = nansum(newints(:,2) - newints(:,1))/allsesstimes(i);
+            end
+            if sumbehav(i,j) >= 1
                 dbs = 1;
             end
         end

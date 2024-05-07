@@ -1,5 +1,5 @@
-function rdb = ReunionDatabase_0p2()
-% RRdb = ReunionDatabase_0p1()
+function rdb = ReunionDatabase_CCSS()
+% RRdb = ReunionDatabase_CCSS()
 %
 % puts all of the reunion data into a single database
 %
@@ -39,7 +39,7 @@ function rdb = ReunionDatabase_0p2()
 %       - sl_ident (200 length cell array of syllable identities)
 %    
 %
-% nei & stephencook 12/18
+% nei  12/18
 %
 
 global spreadsheetfilename

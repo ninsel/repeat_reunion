@@ -1,4 +1,4 @@
-function [degutable scorercell] = Make_DeguTable(rdb_rr, inds, sumbehavID2)
+function [degutable scorercell] = Make_DeguTable2(rdb_rr, inds, sumbehavID2)
 
 %degutable = Make_DeguTable(rdb_rr, inds)
 %
@@ -13,6 +13,7 @@ function [degutable scorercell] = Make_DeguTable(rdb_rr, inds, sumbehavID2)
 %
 %
 % nei 3/22 (based on mk_degutable)
+%  part 2 changes paircode to degu number line 62
 
 if nargin < 3
     betypes = [-1 1 2 3 5]; % agonistic, grooming, rear sniffing, face-to-face, body sniffing
@@ -58,7 +59,7 @@ for i = 1:length(alldegus)
                     curind = intersect(intersect(csnAB, exposurenum_ind{m}), inds);                    
                    if ~isempty(curind)
                        curind = curind(1); %REMOVVE LATER 
-                        degutable(i,1+k) = setdiff([rdb_rr.deguA(curind) rdb_rr.deguB(curind)], rdb_rr.alldegus(i));
+                        degutable(i,1+k) = setdiff([rdb_rr.deguA(curind) rdb_rr.deguB(curind)], alldegus(i));
                         tableind = 5+ (k-1)*5 + m;
                         degutable(i, tableind, :) = sumbehavID2(curind, dABind{j});
                         scorercell{i,tableind} = rdb_rr.scorer{curind};
